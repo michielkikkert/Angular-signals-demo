@@ -38,18 +38,32 @@ export class ChildOutputComponent {
         <p class="readable-text">Parent received: <strong>{{ lastMsg }}</strong></p>
       </div>
 
-      <pre><code [highlight]="codeSnippet" language="typescript"></code></pre>
+      <pre><code [highlight]="codeSnippet" [language]="'typescript'"></code></pre>
     </div>
   `
 })
 export class OutputsComponent {
   lastMsg = 'Waiting...';
-  codeSnippet = `// In child component:
+  codeSnippet = `// Child component (TypeScript):
 notified = output<string>();
-this.notified.emit('Hello!');
 
-// In parent template:
-<app-child-output (notified)="onNotified($event)" />`;
+notifyParent() {
+  this.notified.emit('Action from Child at ' + new Date().toLocaleTimeString());
+}
+
+// Child component (Template):
+<button (click)="notifyParent()">Notify Parent</button>
+
+// Parent component (Template):
+<app-child-output (notified)="onNotified($event)" />
+<p>Parent received: {{ lastMsg }}</p>
+
+// Parent component (TypeScript):
+lastMsg = 'Waiting...';
+
+onNotified(msg: string) {
+  this.lastMsg = msg;
+}`;
 
   onNotified(msg: string) {
     this.lastMsg = msg;

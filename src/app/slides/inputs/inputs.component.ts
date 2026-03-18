@@ -33,7 +33,7 @@ export class ChildInputComponent {
         <app-child-input [label]="'Hello from Parent!'" />
       </div>
 
-      <pre><code [highlight]="codeSnippet" language="typescript"></code></pre>
+      <pre><code [highlight]="codeSnippet" [language]="'typescript'"></code></pre>
 
       <ul class="readable-text">
         <li>Automatically tracks changes.</li>
@@ -44,9 +44,12 @@ export class ChildInputComponent {
   `
 })
 export class InputsComponent {
-  codeSnippet = `// In child component:
+  codeSnippet = `// Child component (TypeScript):
 label = input.required<string>();
 
-// In parent template:
+// Child component (Template):
+<p>{{ label() }}</p>
+
+// Parent template:
 <app-child-input [label]="'Hello!'" />`;
 }

@@ -23,7 +23,7 @@ import { HighlightModule } from 'ngx-highlightjs';
         </mat-card-content>
       </mat-card>
 
-      <pre><code [highlight]="codeSnippet" language="typescript"></code></pre>
+      <pre><code [highlight]="codeSnippet" [language]="'typescript'"></code></pre>
     </div>
   `,
   styles: [`
@@ -33,13 +33,15 @@ import { HighlightModule } from 'ngx-highlightjs';
 })
 export class WritableComponent {
   count = signal(0);
-  codeSnippet = `const count = signal(0);
+  codeSnippet = `// TypeScript:
+count = signal(0);
+increment() => this.count.update(c => c + 1);
+reset() => this.count.set(0);
 
-// Update using current value
-count.update(v => v + 1);
-
-// Set a new value directly
-count.set(0);`;
+// Template:
+<p>Count: {{ count() }}</p>
+<button (click)="increment()">+1</button>
+<button (click)="reset()">Reset</button>`;
 
   increment() {
     this.count.update(c => c + 1);

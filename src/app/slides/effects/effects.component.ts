@@ -23,7 +23,7 @@ import { HighlightModule } from 'ngx-highlightjs';
         </mat-card-content>
       </mat-card>
 
-      <pre><code [highlight]="codeSnippet" language="typescript"></code></pre>
+      <pre><code [highlight]="codeSnippet" [language]="'typescript'"></code></pre>
     </div>
   `,
   styles: [`
@@ -33,13 +33,17 @@ import { HighlightModule } from 'ngx-highlightjs';
 })
 export class EffectsComponent {
   value = signal(10);
-  codeSnippet = `effect(() => {
-  console.log('Value changed:', value());
-  // Useful for:
-  // - Logging
-  // - Syncing with LocalStorage
-  // - Manual DOM manipulation
-});`;
+  codeSnippet = `// TypeScript:
+value = signal(10);
+
+constructor() {
+  effect(() => {
+    console.log('Value changed:', this.value());
+  });
+}
+
+// Template:
+<p>Value: {{ value() }}</p>`;
 
   constructor() {
     effect(() => {

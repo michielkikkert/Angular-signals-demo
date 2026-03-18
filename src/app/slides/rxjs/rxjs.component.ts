@@ -20,7 +20,7 @@ import { HighlightModule } from 'ngx-highlightjs';
         </mat-card-content>
       </mat-card>
 
-      <pre><code [highlight]="codeSnippet" language="typescript"></code></pre>
+      <pre><code [highlight]="codeSnippet" [language]="'typescript'"></code></pre>
 
       <ul class="readable-text">
         <li><code>toSignal</code> handles subscriptions and cleanup automatically.</li>
@@ -34,9 +34,10 @@ import { HighlightModule } from 'ngx-highlightjs';
 })
 export class RxjsComponent {
   ticks = toSignal(interval(1000), { initialValue: 0 });
-  codeSnippet = `// Convert an Observable to a Signal
+  codeSnippet = `// TypeScript:
 const ticks = toSignal(interval(1000), { initialValue: 0 });
+const count$ = toObservable(count);
 
-// Convert a Signal back to an Observable
-const count$ = toObservable(count);`;
+// Template:
+<p>Ticks: {{ ticks() }}</p>`;
 }

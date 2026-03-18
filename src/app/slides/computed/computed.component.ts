@@ -23,7 +23,7 @@ import { HighlightModule } from 'ngx-highlightjs';
         </mat-card-content>
       </mat-card>
 
-      <pre><code [highlight]="codeSnippet" language="typescript"></code></pre>
+      <pre><code [highlight]="codeSnippet" [language]="'typescript'"></code></pre>
     </div>
   `,
   styles: [`
@@ -34,10 +34,13 @@ import { HighlightModule } from 'ngx-highlightjs';
 export class ComputedComponent {
   base = signal(1);
   double = computed(() => this.base() * 2);
-  codeSnippet = `const base = signal(1);
+  codeSnippet = `// TypeScript:
+base = signal(1);
+double = computed(() => this.base() * 2);
 
-// Dependencies are tracked automatically
-const double = computed(() => base() * 2);`;
+// Template:
+<p>Base: {{ base() }}</p>
+<p>Double: {{ double() }}</p>`;
 
   increment() {
     this.base.update(b => b + 1);

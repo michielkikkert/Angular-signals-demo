@@ -1,7 +1,9 @@
 import { Component, signal, ChangeDetectionStrategy, resource } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { HighlightModule } from 'ngx-highlightjs';
+import { of, delay } from 'rxjs';
 
 interface User {
   id: number;
@@ -29,16 +31,21 @@ interface User {
           </div>
           <hr />
           @if (userResource.isLoading()) {
-            <p>Loading...</p>
+            <p>Loading (resource)...</p>
           } @else if (userResource.error()) {
             <p color="warn">Error: {{ userResource.error() }}</p>
           } @else {
-            <p class="readable-text">Data: <strong>{{ userResource.value()?.name }}</strong></p>
+            <p class="readable-text">Data (resource): <strong>{{ userResource.value()?.name }}</strong></p>
+          }
+          <hr />
+          @if (userRxResource.isLoading()) {
+            <p>Loading (rxResource)...</p>
+          } @else {
+            <p class="readable-text">Data (rxResource): <strong>{{ userRxResource.value()?.name }}</strong></p>
           }
         </mat-card-content>
       </mat-card>
-
-      <pre><code [highlight]="codeSnippet" language="typescript"></code></pre>
+      <pre><code [highlight]="codeSnippet" [language]="'typescript'"></code></pre>
 
       <ul class="readable-text">
         <li><strong>resource():</strong> For Promise-based async operations.</li>
@@ -57,24 +64,42 @@ export class ResourceComponent {
 
   // Example with resource (Promise-based)
   userResource = (resource as any)({
-    request: () => ({ id: this.userId() }),
+    params: () => ({ id: this.userId() }),
     loader: async ({params}: any) => {
       // Simulating a fetch with delay
       return new Promise(resolve => setTimeout(() => resolve({ id: params.id, name: 'User #' + params.id } as User), 800));
     }
   });
 
-  codeSnippet = `// Manage async state with resource
+  // Example with rxResource (RxJS-based)
+  userRxResource = (rxResource as any)({
+    params: () => ({ id: this.userId() }),
+    stream: ({params}: any) => {
+      // Simulating an observable fetch
+      return of({ id: params.id, name: 'Rx User #' + params.id } as User).pipe(delay(1200));
+    }
+  });
+
+  codeSnippet = `// TypeScript:
+// 1. resource (Promise-based)
 userResource = resource({
-  request: () => ({ id: this.userId() }),
-  loader: async ({ request }) => {
-    const response = await fetch(\`/api/users/\${request.id}\`);
+  params: () => ({ id: this.userId() }),
+  loader: async ({ params }) => {
+    const response = await fetch(\`/api/users/\${params.id}\`);
     return response.json();
   }
 });
 
-// Template usage:
-@if (userResource.isLoading()) { ... }
+// 2. rxResource (RxJS-based)
+userRxResource = rxResource({
+  params: () => ({ id: this.userId() }),
+  stream: ({ params }) => {
+    return this.http.get<User>(\`/api/users/\${params.id}\`);
+  }
+});
+
+// Template:
+@if (userResource.isLoading()) { Loading... }
 <p>{{ userResource.value()?.name }}</p>`;
 
   nextUser() {

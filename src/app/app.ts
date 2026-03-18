@@ -31,6 +31,7 @@ export class App {
     { path: '/outputs', label: '5. Modern Outputs' },
     { path: '/rxjs', label: '6. RxJS Interop' },
     { path: '/resource', label: '7. Resource' },
-    { path: '/summary', label: 'Summary' }
+    { path: '/summary', label: 'Summary' },
+      { path: '/playground', label: 'Playground' }
   ];
 }

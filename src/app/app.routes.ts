@@ -8,16 +8,18 @@ import { OutputsComponent } from './slides/outputs/outputs.component';
 import { RxjsComponent } from './slides/rxjs/rxjs.component';
 import { ResourceComponent } from './slides/resource/resource.component';
 import { SummaryComponent } from './slides/summary/summary.component';
+import { Playground } from './slides/playground/playground';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-  { path: 'welcome', component: WelcomeComponent },
-  { path: 'writable', component: WritableComponent },
-  { path: 'computed', component: ComputedComponent },
-  { path: 'effects', component: EffectsComponent },
-  { path: 'inputs', component: InputsComponent },
-  { path: 'outputs', component: OutputsComponent },
-  { path: 'rxjs', component: RxjsComponent },
-  { path: 'resource', component: ResourceComponent },
-  { path: 'summary', component: SummaryComponent }
+    { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+    { path: 'welcome', component: WelcomeComponent },
+    { path: 'writable', component: WritableComponent },
+    { path: 'computed', component: ComputedComponent },
+    { path: 'effects', component: EffectsComponent },
+    { path: 'inputs', component: InputsComponent },
+    { path: 'outputs', component: OutputsComponent },
+    { path: 'rxjs', component: RxjsComponent },
+    { path: 'resource', component: ResourceComponent },
+    { path: 'summary', component: SummaryComponent },
+    { path: 'playground', component: Playground },
 ];

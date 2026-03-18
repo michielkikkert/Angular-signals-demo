@@ -12,7 +12,7 @@ import { HighlightModule } from 'ngx-highlightjs';
     <div class="slide-container">
       <h1>Side Effects with effects()</h1>
       <p class="readable-text">Use <code>effect()</code> for logging, DOM manipulation, or synchronizing with external APIs.</p>
-      
+
       <mat-card class="demo-card">
         <mat-card-content>
           <p class="readable-text">Value: <strong>{{ value() }}</strong></p>
@@ -38,7 +38,7 @@ value = signal(10);
 
 constructor() {
   effect(() => {
-    console.log('Value changed:', this.value());
+    console.log('Effect triggered. New value:', this.value());
   });
 }
 

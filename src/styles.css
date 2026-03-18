@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+@import "highlight.js/styles/github-dark.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.slide-container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+code {
+  background: #f4f4f4;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+pre {
+  background: #2d2d2d;
+  color: #ccc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  border-left: 5px solid #3f51b5;
+}
+
+.readable-text {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+h1 { font-size: 2.5rem; margin-bottom: 1.5rem; color: #3f51b5; }
+h2 { font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; }

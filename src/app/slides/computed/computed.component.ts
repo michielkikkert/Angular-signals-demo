@@ -12,7 +12,9 @@ import { HighlightModule } from 'ngx-highlightjs';
     <div class="slide-container">
       <h1>Computed Signals</h1>
       <p class="readable-text">Derived state that automatically tracks dependencies using <code>computed()</code>.</p>
-      
+        
+        <p class="readable-text"><b>Computed signals</b> are read-only signals that derive their value from other signals. You define computed signals using the computed function and specifying a derivation:</p>
+        <p class="readable-text">The double signal depends on the count signal. Whenever count updates, Angular knows that double needs to update as well.</p>
       <mat-card class="demo-card">
         <mat-card-content>
           <p class="readable-text">Base: <strong>{{ base() }}</strong></p>
